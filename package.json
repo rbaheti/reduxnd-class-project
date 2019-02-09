@@ -18,5 +18,6 @@
   "homepage": "https://github.com/rbaheti/reduxnd-class-project#readme",
   "devDependencies": {
     "eslint-plugin-react": "^7.12.4"
-  }
+  },
+  "eslint": "eslint --ignore-path .gitignore ."
 }
