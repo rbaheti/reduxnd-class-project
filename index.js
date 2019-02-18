@@ -31,20 +31,32 @@ function createStore (reducer) {
 }
 
 // App Code
-function todos (state = [], action) {
-  if (action.type === 'ADD_TODO') {
-    return state.concat([action.todo])
-  }
 
-  return state
+// Reducer function to update the current state.
+function todos (state = [], action) {
+  switch(action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.todo])
+
+    case 'REMOVE_TODO':
+      return state.filter(todo => todo.id !== action.id);
+  
+    case 'TOGGLE_TODO':
+      return state.map(todo => todo.id !== action.id ? todo : Object.assign({}, todo, {complete: !todo.complete}));
+
+    default:
+      return state;
+  }
 }
 
+// The store object's methods have access to the state of the store via closure.
 const store = createStore(todos)
 
 store.subscribe(() => {
   console.log('The new state is: ', store.getState())
 })
 
+// dispatch an action to get updated state.
 store.dispatch({
   type: 'ADD_TODO',
   todo: {
