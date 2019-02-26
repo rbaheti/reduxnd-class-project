@@ -183,6 +183,12 @@
       const text = document.createTextNode(todo.name);
       node.appendChild(text);
 
+      // If the todo is clicked, mark it complete by showing a line across it.
+      node.style.textDecoration = todo.complete ? "line-through" : "none";
+      node.addEventListener("click", () => {
+        store.dispatch(toggleTodoAction(todo.id));
+      })
+
       document.getElementById("todos")
         .appendChild(node);
     }
